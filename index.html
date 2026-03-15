@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bãi Triều</title>
+    <link rel="icon" href="logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #00f2fe;
+            --accent-color: #8a2be2;
+            --glass-bg: rgba(0, 0, 0, 0);
+            --card-bg: rgba(255, 255, 255, 0.15);
+            --warning-color: #ffde59;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            z-index: 1;
+        }
+
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+
+        #welcome-text {
+            color: var(--primary-color);
+            font-size: clamp(1.2rem, 4vw, 2.2rem);
+            font-weight: 800;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+            animation: heartBeat 2s infinite;
+        }
+
+        @keyframes heartBeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .glass-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            height: 92vh;
+            background: var(--glass-bg);
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            opacity: 0;
+            transition: opacity 1s ease;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .glass-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .glass-container {
+                height: 95vh;
+                justify-content: flex-start;
+                gap: 20px;
+                padding: 20px 10px 120px 10px;
+            }
+        }
+
+        #clock {
+            font-size: clamp(2.5rem, 8vw, 4.2rem);
+            font-weight: 800;
+            color: var(--primary-color);
+            line-height: 1;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        #date {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-top: 5px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .main-title {
+            font-size: clamp(1.8rem, 6vw, 3.2rem);
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: clamp(10px, 3vw, 25px);
+            margin: 5px 0;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 900px) {
+            .links-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .links-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .neon-btn {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 15px 5px;
+            border-radius: 18px;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .neon-btn:hover {
+            background: rgba(0, 242, 254, 0.3);
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .neon-btn i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .neon-btn span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .timeline-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 12px 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .timeline-info div {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--warning-color);
+        }
+
+        .countdown-timer {
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .countdown-timer {
+                font-size: 1.1rem;
+            }
+        }
+
+        .members-label {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .member-chips {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chip {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--primary-color);
+            cursor: help;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .chip:hover {
+            background: var(--primary-color);
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .member-chips {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                max-width: 300px;
+            }
+
+            .chip-vinh {
+                grid-column: span 2;
+                width: fit-content;
+                margin: 0 auto;
+            }
+
+            .chip-tan {
+                order: 1;
+            }
+
+            .chip-lan {
+                order: 2;
+            }
+
+            .chip-vinh {
+                order: 3;
+            }
+
+            .chip-tin {
+                order: 4;
+            }
+
+            .chip-trung {
+                order: 5;
+            }
+        }
+
+        .chip::after {
+            content: attr(data-fullname);
+            position: absolute;
+            bottom: 140%;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: rgba(0, 0, 0, 0.95);
+            color: var(--primary-color);
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            white-space: normal;
+            width: 180px;
+            line-height: 1.4;
+            border: 1px solid var(--primary-color);
+            backdrop-filter: blur(15px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            z-index: 100;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .chip:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="welcome-screen">
+        <div id="welcome-text"></div>
+    </div>
+
+    <div class="glass-container" id="main-content">
+        <div class="datetime-box">
+            <div id="clock">00:00:00</div>
+            <div id="date">Đang tải...</div>
+        </div>
+
+        <h1 class="main-title">BÃI TRIỀU</h1>
+
+        <div class="links-container">
+            <a href="https://meet.google.com/bvp-dkai-tkz" target="_blank" class="neon-btn"><i
+                    class="fas fa-video"></i><span>Phòng Họp</span></a>
+            <a href="https://drive.google.com/drive/folders/1wV8vr9x-ypkuMMQOs2wsBXIW9Oh75nHW" target="_blank"
+                class="neon-btn"><i class="fas fa-server"></i><span>Tổng Kho</span></a>
+            <a href="https://drive.google.com/drive/folders/1koqlxqfEJUJ6zfAIJmtKupba4QgqDnjD?usp=drive_link"
+                target="_blank" class="neon-btn"><i class="fas fa-microchip"></i><span>Dự Án</span></a>
+            <a href="https://docs.google.com/spreadsheets/d/1UP0lfGE331dXSViFq5ssxILgetzwBacsJvaSelRpp00/edit?gid=0#gid=0"
+                target="_blank" class="neon-btn"><i class="fas fa-id-card"></i><span>Nhân Sự</span></a>
+            <a href="https://docs.google.com/spreadsheets/d/1UP0lfGE331dXSViFq5ssxILgetzwBacsJvaSelRpp00/edit?gid=1750052560#gid=1750052560"
+                target="_blank" class="neon-btn"><i class="fas fa-tasks"></i><span>Nhiệm Vụ</span></a>
+            <a href="https://docs.google.com/document/d/1wfyrHmRsArSIpEfZJuqzwZiZwF1nXASjbAzuvtfaAzw/edit?tab=t.0"
+                target="_blank" class="neon-btn"><i class="fas fa-file-alt"></i><span>Báo Cáo</span></a>
+        </div>
+
+        <div class="timeline-section">
+            <div class="timeline-item">
+                <div class="timeline-info">
+                    <div>Thực hiện KLTN</div><span>12/03/2026 - 15/05/2026</span>
+                </div>
+                <div class="countdown-timer" id="timer-thuchien">--</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-info">
+                    <div>Nộp KLTN</div><span>16/05/2026 - 20/05/2026</span>
+                </div>
+                <div class="countdown-timer" id="timer-nop">--</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-info">
+                    <div>Bảo vệ KLTN</div><span>Từ ngày 24/05/2026</span>
+                </div>
+                <div class="countdown-timer" id="timer-baove">--</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="members-label">THÀNH VIÊN ƯU TÚ</div>
+            <div class="member-chips">
+                <div class="chip chip-tan" data-fullname="Trương Nhật Tân 28211103806">Tân</div>
+                <div class="chip chip-lan" data-fullname="Trương Thị Phương Lan 28204404251">Lan</div>
+                <div class="chip chip-vinh" data-fullname="Lê Đức Vinh 28211344383">Vinh</div>
+                <div class="chip chip-tin" data-fullname="Nguyễn Phương Tín 28211153274">Tín</div>
+                <div class="chip chip-trung" data-fullname="Lê Ngọc Trung 28211349462">Trung</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const welcomeMessages = {
+            morning: ["Chào buổi sáng Tân! Ngày mới rực rỡ.", "Cố lên KLTN nhé!", "Nụ cười em là ngọt nhất."],
+            afternoon: ["Nghỉ trưa chút đi má!", "Gửi một cái ôm ấm áp buổi chiều."],
+            evening: ["Tối rồi, gác công việc lại thôi.", "Em là vì sao sáng nhất."],
+            night: ["Khuya rồi, đừng thức muộn nhé. Ngủ ngon đi em!", "Hẹn gặp em trong mơ."]
+        };
+
+        function showWelcome() {
+            const hour = new Date().getHours();
+            let p = 'night';
+            if (hour >= 5 && hour < 12) p = 'morning';
+            else if (hour >= 12 && hour < 17) p = 'afternoon';
+            else if (hour >= 17 && hour < 22) p = 'evening';
+            document.getElementById('welcome-text').innerText = welcomeMessages[p][Math.floor(Math.random() * welcomeMessages[p].length)];
+            setTimeout(() => {
+                document.getElementById('welcome-screen').style.opacity = '0';
+                document.getElementById('main-content').style.opacity = '1';
+                setTimeout(() => document.getElementById('welcome-screen').style.display = 'none', 1000);
+            }, 3000);
+        }
+
+        function update() {
+            const now = new Date();
+            document.getElementById('clock').textContent = now.toLocaleTimeString('vi-VN', { hour12: false });
+            document.getElementById('date').textContent = now.toLocaleDateString('vi-VN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+            const deadlines = [
+                { id: 'timer-thuchien', target: '2026-05-15T23:59:00' },
+                { id: 'timer-nop', target: '2026-05-20T13:00:00' },
+                { id: 'timer-baove', target: '2026-05-24T00:00:00' }
+            ];
+            deadlines.forEach(item => {
+                const dist = new Date(item.target).getTime() - now.getTime();
+                const el = document.getElementById(item.id);
+                if (dist < 0) el.innerHTML = "ĐÃ ĐẾN HẠN";
+                else {
+                    const d = Math.floor(dist / 86400000);
+                    const h = String(Math.floor((dist % 86400000) / 3600000)).padStart(2, '0');
+                    const m = String(Math.floor((dist % 3600000) / 60000)).padStart(2, '0');
+                    const s = String(Math.floor((dist % 60000) / 1000)).padStart(2, '0');
+                    el.innerHTML = `${d > 0 ? d + ' ngày ' : ''}${h}:${m}:${s}`;
+                }
+            });
+        }
+
+        showWelcome();
+        setInterval(update, 1000); update();
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+    </script>
+</body>
+
+</html>
