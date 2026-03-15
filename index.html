@@ -130,13 +130,42 @@
 
         .main-title {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(3rem, 10vw, 5rem);
+            font-size: clamp(3.5rem, 12vw, 5.5rem);
             font-weight: 700;
-            color: #fff;
+            margin: 15px 0;
             letter-spacing: 2px;
-            margin: 10px 0;
-            text-shadow: 2px 2px 15px rgba(0, 242, 254, 0.6);
             text-transform: none;
+            background: linear-gradient(to right,
+                    #1a0033, #240046, #3c096c, #5a189a, #7b2cbf, #9d4edd,
+                    #c77dff, #e0aaff, #f0d3ff, #bde0fe, #a2d2ff, #8ecae6,
+                    #219ebc, #00b4d8, #0077b6, #023e8a, #0096c7, #48cae4,
+                    #90e0ef, #ade8f4, #caf0f8, #e0f2f1, #f5f5f5, #ffffff);
+            background-size: 600% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowFlow 12s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+            cursor: default;
+            transition: all 0.5s ease;
+        }
+
+        @keyframes rainbowFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .main-title:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.6));
         }
 
         .links-container {
