@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bãi Triều</title>
     <link rel="icon" href="logo.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
             --primary-color: #00f2fe;
-            --accent-color: #8a2be2;
+            --rose-color: #ff4d6d;
+            --rose-glow: rgba(255, 77, 109, 0.5);
             --glass-bg: rgba(0, 0, 0, 0);
-            --card-bg: rgba(255, 255, 255, 0.15);
             --warning-color: #ffde59;
         }
 
@@ -43,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
 
@@ -86,7 +87,7 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             height: 92vh;
             background: var(--glass-bg);
             padding: 10px;
@@ -102,15 +103,6 @@
 
         .glass-container::-webkit-scrollbar {
             display: none;
-        }
-
-        @media (max-width: 768px) {
-            .glass-container {
-                height: 95vh;
-                justify-content: flex-start;
-                gap: 20px;
-                padding: 20px 10px 120px 10px;
-            }
         }
 
         #clock {
@@ -132,21 +124,13 @@
             font-family: 'Great Vibes', cursive;
             font-size: clamp(3.5rem, 12vw, 5.5rem);
             font-weight: 600;
-            margin: 2px 0;
-            letter-spacing: 2px;
-            text-transform: none;
-            background: linear-gradient(to right,
-                    #1a0033, #240046, #3c096c, #5a189a, #7b2cbf, #9d4edd,
-                    #c77dff, #e0aaff, #f0d3ff, #bde0fe, #a2d2ff, #8ecae6,
-                    #219ebc, #00b4d8, #0077b6, #023e8a, #0096c7, #48cae4,
-                    #90e0ef, #ade8f4, #caf0f8, #e0f2f1, #f5f5f5, #ffffff);
-            background-size: 600% auto;
+            margin: 5px 0;
+            background: linear-gradient(to right, #00f2fe, #7b2cbf, #ff4d6d, #ffffff, #00f2fe);
+            background-size: 400% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: rainbowFlow 12s linear infinite;
-            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.2));
-            cursor: default;
-            transition: all 0.5s ease;
+            animation: rainbowFlow 8s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
         }
 
         @keyframes rainbowFlow {
@@ -154,76 +138,97 @@
                 background-position: 0% 50%;
             }
 
-            50% {
+            100% {
                 background-position: 100% 50%;
             }
-
-            100% {
-                background-position: 0% 50%;
-            }
         }
 
-        .main-title:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.6));
-        }
-
+        /* HÀNG NÚT NGANG 7 CỘT */
         .links-container {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 15px;
-            max-width: 1000px;
-            margin: 0 auto;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+            max-width: 1200px;
+            margin: 15px auto;
             width: 100%;
         }
 
-        @media (max-width: 900px) {
-            .links-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .links-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         .neon-btn {
-            padding: 15px 5px;
-            border-radius: 18px;
+            padding: 18px 5px;
+            border-radius: 20px;
             text-decoration: none;
             color: #fff;
-            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             align-items: center;
-
+            backdrop-filter: blur(5px);
         }
 
         .neon-btn:hover {
-            background: rgba(0, 242, 254, 0.3);
+            background: rgba(0, 242, 254, 0.15);
             border-color: var(--primary-color);
-            transform: scale(1.05);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
         }
 
         .neon-btn i {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
+            font-size: 1.7rem;
+            margin-bottom: 10px;
             color: var(--primary-color);
+            transition: 0.3s;
         }
 
         .neon-btn span {
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
+        /* STYLE RIÊNG CHO NÚT PHƯƠNG LAN 🌹 */
+        .btn-lan {
+            border: 1px solid var(--rose-color) !important;
+        }
+
+        .btn-lan:hover {
+            background: rgba(255, 77, 109, 0.15) !important;
+            box-shadow: 0 10px 20px var(--rose-glow) !important;
+            border-color: #ff85a2 !important;
+        }
+
+        .btn-lan .rose-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 5px var(--rose-color));
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .btn-lan span {
+            color: #ffb3c1 !important;
+            text-shadow: 0 0 5px var(--rose-color);
+        }
+
+        @keyframes sway {
+
+            0%,
+            100% {
+                transform: rotate(-10deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(15deg) scale(1.1);
+            }
+        }
+
+        /* Timeline Section */
         .timeline-section {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             width: 100%;
         }
@@ -234,13 +239,14 @@
             align-items: center;
             padding: 12px 25px;
             border-radius: 15px;
+            background: rgba(255, 255, 255, 0.07);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #fff;
         }
 
         .timeline-info div {
             font-size: 1.1rem;
-            font-weight: 900;
+            font-weight: 800;
             color: var(--warning-color);
         }
 
@@ -251,88 +257,43 @@
             font-size: 1.3rem;
         }
 
-        @media (max-width: 768px) {
-            .timeline-item {
-                flex-direction: column;
-                padding: 10px;
-            }
-
-            .countdown-timer {
-                font-size: 1.1rem;
-            }
-        }
-
+        /* Footer & Chips */
         .members-label {
             color: var(--primary-color);
             font-size: 0.8rem;
             font-weight: 800;
             letter-spacing: 5px;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         .member-chips {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            max-width: 1000px;
-            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .chip {
             background: rgba(0, 0, 0, 0.5);
             color: #fff;
-            padding: 8px 20px;
+            padding: 8px 18px;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border: 1px solid var(--primary-color);
             cursor: help;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-align: center;
-            min-width: 100px;
+            transition: 0.3s;
         }
 
         .chip:hover {
             background: var(--primary-color);
             color: #000;
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px var(--primary-color);
+            transform: scale(1.1);
         }
 
-        @media (max-width: 768px) {
-            .member-chips {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-                max-width: 300px;
-            }
-
-            .chip-vinh {
-                grid-column: span 2;
-                width: fit-content;
-                margin: 0 auto;
-            }
-
-            .chip-tan {
-                order: 1;
-            }
-
-            .chip-lan {
-                order: 2;
-            }
-
-            .chip-vinh {
-                order: 3;
-            }
-
-            .chip-tin {
-                order: 4;
-            }
-
-            .chip-trung {
-                order: 5;
-            }
+        .chip-lan-small {
+            border-color: var(--rose-color) !important;
+            color: #ffb3c1 !important;
         }
 
         .chip::after {
@@ -343,25 +304,38 @@
             transform: translateX(-50%) scale(0);
             background: rgba(0, 0, 0, 0.95);
             color: var(--primary-color);
-            padding: 10px 15px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            white-space: normal;
+            padding: 10px;
+            border-radius: 10px;
             width: 180px;
-            line-height: 1.4;
-            border: 1px solid var(--primary-color);
-            backdrop-filter: blur(15px);
             opacity: 0;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
             pointer-events: none;
             z-index: 100;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--primary-color);
         }
 
         .chip:hover::after {
             opacity: 1;
             transform: translateX(-50%) scale(1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .links-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .links-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .glass-container {
+                justify-content: flex-start;
+                gap: 20px;
+                padding-top: 30px;
+            }
         }
     </style>
 </head>
@@ -392,6 +366,11 @@
                 target="_blank" class="neon-btn"><i class="fas fa-tasks"></i><span>Nhiệm Vụ</span></a>
             <a href="https://docs.google.com/document/d/1wfyrHmRsArSIpEfZJuqzwZiZwF1nXASjbAzuvtfaAzw/edit?tab=t.0"
                 target="_blank" class="neon-btn"><i class="fas fa-file-alt"></i><span>Báo Cáo</span></a>
+
+            <a href="phuonglan.html" class="neon-btn btn-lan">
+                <div class="rose-icon">🌹</div>
+                <span>Phương Lan</span>
+            </a>
         </div>
 
         <div class="timeline-section">
@@ -418,21 +397,21 @@
         <div class="footer">
             <div class="members-label">THÀNH VIÊN ƯU TÚ</div>
             <div class="member-chips">
-                <div class="chip chip-tan" data-fullname="Trương Nhật Tân 28211103806">Tân</div>
-                <div class="chip chip-lan" data-fullname="Trương Thị Phương Lan 28204404251">Lan</div>
-                <div class="chip chip-vinh" data-fullname="Lê Đức Vinh 28211344383">Vinh</div>
-                <div class="chip chip-tin" data-fullname="Nguyễn Phương Tín 28211153274">Tín</div>
-                <div class="chip chip-trung" data-fullname="Lê Ngọc Trung 28211349462">Trung</div>
+                <div class="chip" data-fullname="Trương Nhật Tân 28211103806">Tân</div>
+                <div class="chip chip-lan-small" data-fullname="Trương Thị Phương Lan 28204404251">🌹 Lan</div>
+                <div class="chip" data-fullname="Lê Đức Vinh 28211344383">Vinh</div>
+                <div class="chip" data-fullname="Nguyễn Phương Tín 28211153274">Tín</div>
+                <div class="chip" data-fullname="Lê Ngọc Trung 28211349462">Trung</div>
             </div>
         </div>
     </div>
 
     <script>
         const welcomeMessages = {
-            morning: ["Chào buổi sáng Tân! Ngày mới rực rỡ.", "Cố lên KLTN nhé!", "Nụ cười em là ngọt nhất."],
-            afternoon: ["Nghỉ trưa chút đi má!", "Gửi một cái ôm ấm áp buổi chiều."],
-            evening: ["Tối rồi, gác công việc lại thôi.", "Em là vì sao sáng nhất."],
-            night: ["Khuya rồi, đừng thức muộn nhé. Ngủ ngon đi em!", "Hẹn gặp em trong mơ."]
+            morning: ["Chào buổi sáng rực rỡ!", "Cố lên KLTN nhé!", "Hôm nay là một ngày tuyệt vời."],
+            afternoon: ["Nghỉ tay chút đi má!", "Chúc buổi chiều làm việc hiệu quả."],
+            evening: ["Tối rồi, nghỉ ngơi thôi.", "Em là vì sao sáng nhất."],
+            night: ["Khuya rồi, đi ngủ sớm đi nè!", "Hẹn gặp em trong mơ."]
         };
 
         function showWelcome() {
@@ -441,12 +420,13 @@
             if (hour >= 5 && hour < 12) p = 'morning';
             else if (hour >= 12 && hour < 17) p = 'afternoon';
             else if (hour >= 17 && hour < 22) p = 'evening';
-            document.getElementById('welcome-text').innerText = welcomeMessages[p][Math.floor(Math.random() * welcomeMessages[p].length)];
+            const msg = welcomeMessages[p][Math.floor(Math.random() * welcomeMessages[p].length)];
+            document.getElementById('welcome-text').innerText = msg;
             setTimeout(() => {
                 document.getElementById('welcome-screen').style.opacity = '0';
                 document.getElementById('main-content').style.opacity = '1';
                 setTimeout(() => document.getElementById('welcome-screen').style.display = 'none', 1000);
-            }, 3000);
+            }, 2500);
         }
 
         function update() {
@@ -468,37 +448,14 @@
                     const h = String(Math.floor((dist % 86400000) / 3600000)).padStart(2, '0');
                     const m = String(Math.floor((dist % 3600000) / 60000)).padStart(2, '0');
                     const s = String(Math.floor((dist % 60000) / 1000)).padStart(2, '0');
-                    el.innerHTML = `${d > 0 ? d + ' ngày ' : ''}${h}:${m}:${s}`;
+                    el.innerHTML = `${d > 0 ? d + 'n ' : ''}${h}:${m}:${s}`;
                 }
             });
         }
 
         showWelcome();
         setInterval(update, 1000); update();
-
         document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('selectstart', e => e.preventDefault());
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12') {
-                e.preventDefault();
-                return false;
-            }
-
-            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-                e.preventDefault();
-                return false;
-            }
-
-            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-                e.preventDefault();
-                return false;
-            }
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-                return false;
-            }
-        });
     </script>
 </body>
 
